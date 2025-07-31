@@ -1,0 +1,22 @@
+[
+  {
+    "id": "t1",
+    "type": "cleaning",
+    "assigned_to": "u4",
+    "booking_id": "b1",
+    "status": "Pending",
+    "created_at": "2025-07-10T15:00:00Z",
+    "updated_at": "2025-07-10T15:00:00Z",
+    "details": "Clean room 101 after checkout"
+  },
+  {
+    "id": "t2",
+    "type": "food",
+    "assigned_to": "u3",
+    "booking_id": "b1",
+    "status": "In Progress",
+    "created_at": "2025-07-10T15:10:00Z",
+    "updated_at": "2025-07-10T15:20:00Z",
+    "details": "Breakfast for Alice Guest"
+  }
+]
