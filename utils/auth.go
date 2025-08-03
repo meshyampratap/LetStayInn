@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"hotel-management-cli/models"
 	"crypto/sha256"
 	"encoding/hex"
+	"hotel-management-cli/models"
 )
 
 func HashPassword(password string) string {

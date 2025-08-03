@@ -4,10 +4,10 @@ import "time"
 
 // UserRole type for role-based access
 const (
-	RoleGuest           = "guest"
-	RoleKitchenStaff    = "kitchen_staff"
-	RoleCleaningStaff   = "cleaning_staff"
-	RoleManager         = "manager"
+	RoleGuest         = "guest"
+	RoleKitchenStaff  = "kitchen_staff"
+	RoleCleaningStaff = "cleaning_staff"
+	RoleManager       = "manager"
 )
 
 type User struct {

@@ -33,10 +33,10 @@ func AddRoom() {
 	fmt.Scanln(&desc)
 	id := fmt.Sprintf("r%d", len(rooms)+1)
 	room := models.Room{
-		ID: id,
-		Number: number,
-		Type: rtype,
-		Price: price,
+		ID:          id,
+		Number:      number,
+		Type:        rtype,
+		Price:       price,
 		IsAvailable: true,
 		Description: desc,
 	}

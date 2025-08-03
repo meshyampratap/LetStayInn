@@ -2,9 +2,9 @@ package utils
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
-	"fmt"
 )
 
 var dataFiles = []string{
@@ -12,6 +12,8 @@ var dataFiles = []string{
 	"data/rooms.json",
 	"data/bookings.json",
 	"data/tasks.json",
+	"data/feedback.json",
+	"data/service_requests.json",
 }
 
 func EnsureDataFilesExist() {

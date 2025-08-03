@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"hotel-management-cli/services"
 	"hotel-management-cli/utils"
+	"os"
 )
 
 func main() {

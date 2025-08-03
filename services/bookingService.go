@@ -2,9 +2,9 @@ package services
 
 import (
 	"fmt"
-	"time"
 	"hotel-management-cli/models"
 	"hotel-management-cli/utils"
+	"time"
 )
 
 func BookRoom(user *models.User) {
@@ -41,12 +41,12 @@ func BookRoom(user *models.User) {
 	utils.ReadJSON("data/bookings.json", &bookings)
 	id := fmt.Sprintf("b%d", len(bookings)+1)
 	booking := models.Booking{
-		ID: id,
-		UserID: user.ID,
-		RoomID: selected.ID,
-		CheckIn: ci,
+		ID:       id,
+		UserID:   user.ID,
+		RoomID:   selected.ID,
+		CheckIn:  ci,
 		CheckOut: co,
-		Status: "Booked",
+		Status:   "Booked",
 	}
 	bookings = append(bookings, booking)
 	utils.WriteJSON("data/bookings.json", bookings)
