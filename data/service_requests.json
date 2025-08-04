@@ -5,5 +5,19 @@
     "type": "cleaning",
     "status": "pending",
     "created_at": "2025-08-03T17:21:53+05:30"
+  },
+  {
+    "id": "sr2",
+    "user_id": "u8",
+    "type": "food",
+    "status": "pending",
+    "created_at": "2025-08-04T21:33:18+05:30"
+  },
+  {
+    "id": "sr3",
+    "user_id": "u8",
+    "type": "cleaning",
+    "status": "pending",
+    "created_at": "2025-08-04T21:33:21+05:30"
   }
 ]
