@@ -216,8 +216,8 @@ func ManagerDashboard(user *models.User) {
 		fmt.Scanln(&choice)
 
 		switch choice {
-		case 1:
-			fmt.Println(utils.ColorInfo("Dashboard summary feature coming soon."))
+	   case 1:
+		   DashboardSummary()
 		case 2:
 		RoomMgmtLoop:
 			for {
