@@ -12,19 +12,19 @@ import (
 
 func Signup() {
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("\n--- Signup ---")
-	fmt.Print("Enter name: ")
+	fmt.Printf("\n%s\n", utils.ColorTitle("--- Signup ---"))
+	fmt.Print(utils.ColorPrompt("Enter name: "))
 	name, _ := reader.ReadString('\n')
 	name = strings.TrimSpace(name)
-	fmt.Print("Enter email: ")
+	fmt.Print(utils.ColorPrompt("Enter email: "))
 	email, _ := reader.ReadString('\n')
 	email = strings.TrimSpace(email)
-	fmt.Print("Enter password: ")
+	fmt.Print(utils.ColorPrompt("Enter password: "))
 	password, _ := reader.ReadString('\n')
 	password = strings.TrimSpace(password)
 
-	fmt.Println("Select role: 1.Guest 2.Kitchen Staff 3.Room Cleaning Staff 4.Manager")
-	fmt.Print("Enter choice: ")
+	fmt.Println(utils.ColorPrompt("Select role: 1.Guest 2.Kitchen Staff 3.Room Cleaning Staff 4.Manager"))
+	fmt.Print(utils.ColorPrompt("Enter choice: "))
 	var roleChoice int
 	fmt.Scanln(&roleChoice)
 
@@ -39,7 +39,7 @@ func Signup() {
 	case 4:
 		role = models.RoleManager
 	default:
-		fmt.Println("Invalid role.")
+		fmt.Println(utils.ColorError("Invalid role."))
 		return
 	}
 
@@ -47,7 +47,7 @@ func Signup() {
 	utils.ReadJSON("data/users.json", &users)
 
 	if utils.FindUserByEmail(users, email) != nil {
-		fmt.Println("Email already exists.")
+		fmt.Println(utils.ColorError("Email already exists."))
 		return
 	}
 
@@ -64,16 +64,16 @@ func Signup() {
 
 	users = append(users, newUser)
 	utils.WriteJSON("data/users.json", users)
-	fmt.Println("Signup successful! Please login.")
+	fmt.Println(utils.ColorSuccess("Signup successful! Please login."))
 }
 
 func Login() {
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("\n--- Login ---")
-	fmt.Print("Enter email: ")
+	fmt.Printf("\n%s\n", utils.ColorTitle("--- Login ---"))
+	fmt.Print(utils.ColorPrompt("Enter email: "))
 	email, _ := reader.ReadString('\n')
 	email = strings.TrimSpace(email)
-	fmt.Print("Enter password: ")
+	fmt.Print(utils.ColorPrompt("Enter password: "))
 	password, _ := reader.ReadString('\n')
 	password = strings.TrimSpace(password)
 
@@ -82,11 +82,11 @@ func Login() {
 	user := utils.FindUserByEmail(users, email)
 
 	if user == nil || !utils.CheckPassword(user.Password, password) {
-		fmt.Println("Invalid credentials.")
+		fmt.Println(utils.ColorError("Invalid credentials."))
 		return
 	}
 
-	fmt.Printf("Welcome, %s!\n", user.Name)
+	fmt.Printf("%s\n", utils.ColorSuccess(fmt.Sprintf("Welcome, %s!", user.Name)))
 
 	switch user.Role {
 	case models.RoleGuest:
@@ -104,16 +104,16 @@ func Login() {
 
 func GuestDashboard(user *models.User) {
 	for {
-		fmt.Println("\n--- Guest Dashboard ---")
-		fmt.Println("1. View Available Rooms")
-		fmt.Println("2. Book Room")
-		fmt.Println("3. Cancel Booking")
-		fmt.Println("4. View My Bookings")
-		fmt.Println("5. Request Food")
-		fmt.Println("6. Request Room Cleaning")
-		fmt.Println("7. Give Feedback")
-		fmt.Println("8. Logout")
-		fmt.Print("Select option: ")
+		fmt.Printf("\n%s\n", utils.ColorTitle("--- Guest Dashboard ---"))
+		fmt.Println(utils.ColorPrompt("1. View Available Rooms"))
+		fmt.Println(utils.ColorPrompt("2. Book Room"))
+		fmt.Println(utils.ColorPrompt("3. Cancel Booking"))
+		fmt.Println(utils.ColorPrompt("4. View My Bookings"))
+		fmt.Println(utils.ColorPrompt("5. Request Food"))
+		fmt.Println(utils.ColorPrompt("6. Request Room Cleaning"))
+		fmt.Println(utils.ColorPrompt("7. Give Feedback"))
+		fmt.Println(utils.ColorPrompt("8. Logout"))
+		fmt.Print(utils.ColorInfo("Select option: "))
 
 		var choice int
 		fmt.Scanln(&choice)
@@ -134,22 +134,22 @@ func GuestDashboard(user *models.User) {
 		case 7:
 			SubmitFeedback(user)
 		case 8:
-			fmt.Println("Logging out...")
+			fmt.Println(utils.ColorInfo("Logging out..."))
 			return
 		default:
-			fmt.Println("Invalid option.")
+			fmt.Println(utils.ColorError("Invalid option."))
 		}
 	}
 }
 
 func KitchenDashboard(user *models.User) {
 	for {
-		fmt.Println("\n--- Kitchen Staff Dashboard ---")
-		fmt.Println("1. View Assigned Food Requests")
-		fmt.Println("2. Update Food Order Status")
-		fmt.Println("3. Mark Availability")
-		fmt.Println("4. Logout")
-		fmt.Print("Select option: ")
+		fmt.Printf("\n%s\n", utils.ColorTitle("--- Kitchen Staff Dashboard ---"))
+		fmt.Println(utils.ColorPrompt("1. View Assigned Food Requests"))
+		fmt.Println(utils.ColorPrompt("2. Update Food Order Status"))
+		fmt.Println(utils.ColorPrompt("3. Mark Availability"))
+		fmt.Println(utils.ColorPrompt("4. Logout"))
+		fmt.Print(utils.ColorInfo("Select option: "))
 
 		var choice int
 		fmt.Scanln(&choice)
@@ -162,22 +162,22 @@ func KitchenDashboard(user *models.User) {
 		case 3:
 			toggleAvailability(user)
 		case 4:
-			fmt.Println("Logging out...")
+			fmt.Println(utils.ColorInfo("Logging out..."))
 			return
 		default:
-			fmt.Println("Invalid option.")
+			fmt.Println(utils.ColorError("Invalid option."))
 		}
 	}
 }
 
 func CleaningDashboard(user *models.User) {
 	for {
-		fmt.Println("\n--- Room Cleaning Staff Dashboard ---")
-		fmt.Println("1. View Assigned Cleaning Requests")
-		fmt.Println("2. Update Task Status")
-		fmt.Println("3. Mark Availability")
-		fmt.Println("4. Logout")
-		fmt.Print("Select option: ")
+		fmt.Printf("\n%s\n", utils.ColorTitle("--- Room Cleaning Staff Dashboard ---"))
+		fmt.Println(utils.ColorPrompt("1. View Assigned Cleaning Requests"))
+		fmt.Println(utils.ColorPrompt("2. Update Task Status"))
+		fmt.Println(utils.ColorPrompt("3. Mark Availability"))
+		fmt.Println(utils.ColorPrompt("4. Logout"))
+		fmt.Print(utils.ColorInfo("Select option: "))
 
 		var choice int
 		fmt.Scanln(&choice)
@@ -190,44 +190,44 @@ func CleaningDashboard(user *models.User) {
 		case 3:
 			toggleAvailability(user)
 		case 4:
-			fmt.Println("Logging out...")
+			fmt.Println(utils.ColorInfo("Logging out..."))
 			return
 		default:
-			fmt.Println("Invalid option.")
+			fmt.Println(utils.ColorError("Invalid option."))
 		}
 	}
 }
 
 func ManagerDashboard(user *models.User) {
 	for {
-		fmt.Println("\n--- Manager Dashboard ---")
-		fmt.Println("1. View Dashboard Summary")
-		fmt.Println("2. Room Management")
-		fmt.Println("3. View Bookings and Guests")
-		fmt.Println("4. Manage Employees")
-		fmt.Println("5. Assign Cleaning Tasks")
-		fmt.Println("6. Assign Food Requests")
-		fmt.Println("7. View Guest Service Requests")
-		fmt.Println("8. Generate Reports")
-		fmt.Println("9. Logout")
-		fmt.Print("Select option: ")
+		fmt.Printf("\n%s\n", utils.ColorTitle("--- Manager Dashboard ---"))
+		fmt.Println(utils.ColorPrompt("1. View Dashboard Summary"))
+		fmt.Println(utils.ColorPrompt("2. Room Management"))
+		fmt.Println(utils.ColorPrompt("3. View Bookings and Guests"))
+		fmt.Println(utils.ColorPrompt("4. Manage Employees"))
+		fmt.Println(utils.ColorPrompt("5. Assign Cleaning Tasks"))
+		fmt.Println(utils.ColorPrompt("6. Assign Food Requests"))
+		fmt.Println(utils.ColorPrompt("7. View Guest Service Requests"))
+		fmt.Println(utils.ColorPrompt("8. Generate Reports"))
+		fmt.Println(utils.ColorPrompt("9. Logout"))
+		fmt.Print(utils.ColorInfo("Select option: "))
 
 		var choice int
 		fmt.Scanln(&choice)
 
 		switch choice {
 		case 1:
-			fmt.Println("Dashboard summary feature coming soon.")
+			fmt.Println(utils.ColorInfo("Dashboard summary feature coming soon."))
 		case 2:
 		RoomMgmtLoop:
 			for {
-				fmt.Println("\n--- Room Management ---")
-				fmt.Println("1. List Rooms")
-				fmt.Println("2. Add Room")
-				fmt.Println("3. Update Room")
-				fmt.Println("4. Delete Room")
-				fmt.Println("5. Back")
-				fmt.Print("Select option: ")
+				fmt.Printf("\n%s\n", utils.ColorTitle("--- Room Management ---"))
+				fmt.Println(utils.ColorPrompt("1. List Rooms"))
+				fmt.Println(utils.ColorPrompt("2. Add Room"))
+				fmt.Println(utils.ColorPrompt("3. Update Room"))
+				fmt.Println(utils.ColorPrompt("4. Delete Room"))
+				fmt.Println(utils.ColorPrompt("5. Back"))
+				fmt.Print(utils.ColorInfo("Select option: "))
 				var rchoice int
 				fmt.Scanln(&rchoice)
 				switch rchoice {
@@ -242,7 +242,7 @@ func ManagerDashboard(user *models.User) {
 				case 5:
 					break RoomMgmtLoop
 				default:
-					fmt.Println("Invalid option.")
+					fmt.Println(utils.ColorError("Invalid option."))
 				}
 			}
 		case 3:
@@ -250,12 +250,12 @@ func ManagerDashboard(user *models.User) {
 		case 4:
 		EmpMgmtLoop:
 			for {
-				fmt.Println("\n--- Employee Management ---")
-				fmt.Println("1. List Employees")
-				fmt.Println("2. Update Employee Availability")
-				fmt.Println("3. Delete Employee")
-				fmt.Println("4. Back")
-				fmt.Print("Select option: ")
+				fmt.Printf("\n%s\n", utils.ColorTitle("--- Employee Management ---"))
+				fmt.Println(utils.ColorPrompt("1. List Employees"))
+				fmt.Println(utils.ColorPrompt("2. Update Employee Availability"))
+				fmt.Println(utils.ColorPrompt("3. Delete Employee"))
+				fmt.Println(utils.ColorPrompt("4. Back"))
+				fmt.Print(utils.ColorInfo("Select option: "))
 				var echoice int
 				fmt.Scanln(&echoice)
 				switch echoice {
@@ -268,7 +268,7 @@ func ManagerDashboard(user *models.User) {
 				case 4:
 					break EmpMgmtLoop
 				default:
-					fmt.Println("Invalid option.")
+					fmt.Println(utils.ColorError("Invalid option."))
 				}
 			}
 		case 5:
@@ -280,10 +280,10 @@ func ManagerDashboard(user *models.User) {
 		case 8:
 			GenerateReport()
 		case 9:
-			fmt.Println("Logging out...")
+			fmt.Println(utils.ColorInfo("Logging out..."))
 			return
 		default:
-			fmt.Println("Invalid option.")
+			fmt.Println(utils.ColorError("Invalid option."))
 		}
 	}
 }

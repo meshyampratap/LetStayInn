@@ -70,5 +70,14 @@
     "role": "guest",
     "created_at": "2025-08-04T21:32:45.1003151+05:30",
     "available": false
+  },
+  {
+    "id": "u9",
+    "name": "shyam@gmail.com",
+    "email": "shyam@gmail.com",
+    "password": "9b8769a4a742959a2d0298c36fb70623f2dfacda8436237df08d8dfd5b37374c",
+    "role": "guest",
+    "created_at": "2025-08-04T22:36:56.7620644+05:30",
+    "available": false
   }
 ]

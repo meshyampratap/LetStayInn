@@ -10,11 +10,11 @@ import (
 func main() {
 	utils.EnsureDataFilesExist()
 	for {
-		fmt.Println("\n--- HOTEL MANAGEMENT CLI ---")
-		fmt.Println("1. Login")
-		fmt.Println("2. Signup")
-		fmt.Println("3. Exit")
-		fmt.Print("Select option: ")
+		fmt.Printf("\n%s\n", utils.ColorTitle("--- HOTEL MANAGEMENT CLI ---"))
+		fmt.Println(utils.ColorPrompt("1. Login"))
+		fmt.Println(utils.ColorPrompt("2. Signup"))
+		fmt.Println(utils.ColorPrompt("3. Exit"))
+		fmt.Print(utils.ColorInfo("Select option: "))
 		var choice int
 		fmt.Scanln(&choice)
 		switch choice {
@@ -23,10 +23,10 @@ func main() {
 		case 2:
 			services.Signup()
 		case 3:
-			fmt.Println("Exiting...")
+			fmt.Println(utils.ColorInfo("Exiting..."))
 			os.Exit(0)
 		default:
-			fmt.Println("Invalid option. Try again.")
+			fmt.Println(utils.ColorError("Invalid option. Try again."))
 		}
 	}
 }
